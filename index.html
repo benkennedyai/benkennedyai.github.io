@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ben Kennedy — AI/ML Engineer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0e17;
+      --bg2: #111827;
+      --bg3: #1a2236;
+      --border: #1f2d45;
+      --accent: #3b82f6;
+      --accent2: #60a5fa;
+      --accent-dim: rgba(59,130,246,0.12);
+      --text: #e2e8f0;
+      --text-muted: #8b9db5;
+      --text-faint: #4a5a70;
+      --green: #10b981;
+      --gold: #f59e0b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      height: 60px;
+      background: rgba(10,14,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 7rem 2rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-inner { max-width: 780px; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 4px;
+      background: var(--accent-dim);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: #f1f5f9;
+    }
+
+    h1 span { color: var(--accent2); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent2); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .stat-val {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--accent2);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #f1f5f9;
+      margin-bottom: 1rem;
+    }
+
+    .section-intro {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+    #contact { padding-top: 2rem; padding-bottom: 3rem; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-size: 0.97rem;
+    }
+
+    .about-text p strong { color: var(--text); font-weight: 600; }
+
+    .about-text p em {
+      color: var(--accent2);
+      font-style: normal;
+    }
+
+    .skills-block { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .skill-group-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 0.6rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .tag.accent {
+      background: var(--accent-dim);
+      border-color: rgba(59,130,246,0.25);
+      color: var(--accent2);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg); }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(59,130,246,0.35);
+      transform: translateY(-2px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-card.flagship {
+      border-color: rgba(59,130,246,0.3);
+      background: linear-gradient(135deg, #111827 0%, #0f1a2e 100%);
+    }
+
+    .project-card.flagship::before { opacity: 1; }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .project-badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+    }
+
+    .badge-flagship {
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.35);
+      color: var(--gold);
+    }
+
+    .badge-acq {
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: var(--green);
+    }
+
+    .badge-cv { background: var(--accent-dim); border: 1px solid rgba(59,130,246,0.25); color: var(--accent2); }
+    .badge-ml { background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.3); color: #a78bfa; }
+    .badge-llm { background: rgba(236,72,153,0.12); border: 1px solid rgba(236,72,153,0.3); color: #f472b6; }
+
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #f1f5f9;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-subtitle {
+      font-size: 0.85rem;
+      color: var(--accent2);
+      margin-bottom: 0.85rem;
+      font-weight: 500;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-desc strong { color: var(--text); font-weight: 600; }
+
+    .project-metrics {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+      padding: 1rem;
+      background: rgba(0,0,0,0.25);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .metric { text-align: left; }
+
+    .metric-val {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent2);
+    }
+
+    .metric-label {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-links { display: flex; gap: 0.75rem; }
+
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      transition: all 0.2s;
+    }
+
+    .link-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg2); }
+
+    .timeline { position: relative; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      padding-left: 2rem;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg2);
+    }
+
+    .timeline-role {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .timeline-company {
+      font-size: 0.9rem;
+      color: var(--accent2);
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-dates {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); }
+
+    .contact-block {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .contact-text h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #f1f5f9;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-text p {
+      font-size: 0.93rem;
+      color: var(--text-muted);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--accent2); }
+
+    .contact-link .icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Ben Kennedy</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Ben Kennedy — Houston, TX</span>
+    <h1>I like building<br/><span>useful things</span><br/>with AI.</h1>
+    <p class="hero-sub">
+      Computer vision, fraud detection, predictive modeling —
+      built on problems I know from the inside.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">See the work</a>
+      <a class="btn btn-secondary" href="#contact">Get in touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">1</div>
+        <div class="stat-label">Acquisition Offer Received &amp; Declined</div>
+      </div>
+      <div>
+        <div class="stat-val">95%</div>
+        <div class="stat-label">ROC-AUC — Fraud Detector</div>
+      </div>
+      <div>
+        <div class="stat-val">3</div>
+        <div class="stat-label">Production ML Systems</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Work</div>
+    <h2>Production systems, real problems.</h2>
+
+    <!-- ESTIMATIX — FLAGSHIP -->
+    <div class="project-card flagship">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Estimatix.AI</div>
+          <div class="project-subtitle">Computer Vision → Construction Estimates &amp; Building Valuations</div>
+        </div>
+        <div class="project-badges">
+          <span class="badge badge-flagship">Flagship</span>
+          <span class="badge badge-acq">Acquisition Offer Received</span>
+          <span class="badge badge-cv">Computer Vision</span>
+        </div>
+      </div>
+
+      <p class="project-desc">
+        A computer vision pipeline that analyzes photographs of structures — identifying roofing materials, siding, slope geometry, ancillary components, and fencing — then generates construction estimates and replacement cost valuations automatically.
+      </p>
+      <p class="project-desc">
+        Built originally in 2020–2021 using <strong>TensorFlow's Object Detection API</strong>, the system included custom-trained models for multiple construction trades, integrated labor cost data by ZIP code, and surfaced estimates through a REST API. The current version uses <strong>YOLO (Ultralytics)</strong> for detection across roofing materials, slope classification, siding type, and fencing. No comparable product existed when this was built — and years later, the gap in the market remains.
+      </p>
+      <p class="project-desc">
+        The system received a <strong>significant acquisition offer</strong>, which I declined. The domain knowledge embedded in the feature engineering — which materials to detect, which combinations drive cost, how slope affects labor — is what separates it from any generic computer vision demo.
+      </p>
+
+      <div class="project-metrics">
+        <div class="metric">
+          <div class="metric-val">4</div>
+          <div class="metric-label">Trained Detection Models</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">3</div>
+          <div class="metric-label">Construction Trades</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">2020</div>
+          <div class="metric-label">Original Build Year</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">0</div>
+          <div class="metric-label">Comparable Competitors Then or Now</div>
+        </div>
+      </div>
+
+      <div class="project-stack">
+        <span class="tag accent">TensorFlow OD API</span>
+        <span class="tag accent">YOLO / Ultralytics</span>
+        <span class="tag">Python</span>
+        <span class="tag">Flask</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">REST API</span>
+        <span class="tag">Custom Dataset Training</span>
+      </div>
+
+      <div class="project-links">
+        <a class="link-btn" href="https://github.com/benkennedyai/ODI-Estimator" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- APPRAISAL AI -->
+    <div class="project-card">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Appraisal Award Predictor</div>
+          <div class="project-subtitle">LLM + ML · Insurance Appraisal Outcome Modeling</div>
+        </div>
+        <div class="project-badges">
+          <span class="badge badge-llm">LLM Integrated</span>
+          <span class="badge badge-ml">ML Regression</span>
+        </div>
+      </div>
+
+      <p class="project-desc">
+        A Streamlit application that predicts appraisal award amounts and case complexity from claim characteristics available at demand receipt — before the appraisal process even begins. Built on top of ML regression and classification models, with <strong>Claude (Anthropic) integrated for plain-English analysis</strong> and follow-up Q&amp;A on each prediction.
+      </p>
+      <p class="project-desc">
+        The feature set was engineered from my own appraisal experience: what's known at demand, what signals are predictive, and what a practitioner actually needs to know going in. The LLM layer translates model output into the kind of summary an adjuster or counsel can act on.
+      </p>
+
+      <div class="project-metrics">
+        <div class="metric">
+          <div class="metric-val">2</div>
+          <div class="metric-label">Trained Models (Award + Complexity)</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">LLM</div>
+          <div class="metric-label">Claude API Integration</div>
+        </div>
+      </div>
+
+      <div class="project-stack">
+        <span class="tag accent">Anthropic / Claude</span>
+        <span class="tag accent">scikit-learn</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">Python</span>
+        <span class="tag">joblib</span>
+        <span class="tag">pandas</span>
+      </div>
+
+      <div class="project-links">
+        <a class="link-btn" href="https://github.com/benkennedyai/Appraisal-Determination-AI" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- FRAUD DETECTOR -->
+    <div class="project-card">
+      <div class="project-header">
+        <div>
+          <div class="project-title">Healthcare Fraud Detector</div>
+          <div class="project-subtitle">ML Pipeline · Provider-Level Fraud Classification</div>
+        </div>
+        <div class="project-badges">
+          <span class="badge badge-ml">XGBoost</span>
+          <span class="badge badge-cv">95% ROC-AUC</span>
+        </div>
+      </div>
+
+      <p class="project-desc">
+        An end-to-end fraud detection pipeline that approaches the problem the way an experienced investigator would — engineering features around billing behaviors, patient patterns, and physician relationships that signal fraudulent providers — then applying ML to scale that intuition across thousands of claims.
+      </p>
+      <p class="project-desc">
+        <strong>SHAP explainability</strong> is built into the workflow from the start, because flagging a provider without a defensible explanation isn't useful in a real investigation. The system trains three models (Logistic Regression, Random Forest, XGBoost) and selects the best, producing feature importance plots that make predictions auditable.
+      </p>
+
+      <div class="project-metrics">
+        <div class="metric">
+          <div class="metric-val">95%</div>
+          <div class="metric-label">ROC-AUC (XGBoost)</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">3</div>
+          <div class="metric-label">Models Trained &amp; Compared</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">SHAP</div>
+          <div class="metric-label">Full Explainability</div>
+        </div>
+      </div>
+
+      <div class="project-stack">
+        <span class="tag accent">XGBoost</span>
+        <span class="tag accent">SHAP</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">Python</span>
+        <span class="tag">pandas</span>
+        <span class="tag">Feature Engineering</span>
+      </div>
+
+      <div class="project-links">
+        <a class="link-btn" href="https://github.com/benkennedyai/Healthcare-Fraud-Detector" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About</div>
+    <h2>Stack &amp; background.</h2>
+    <div class="about-grid">
+      <div class="skills-block">
+        <div>
+          <div class="skill-group-label">ML / AI</div>
+          <div class="skill-tags">
+            <span class="tag accent">TensorFlow</span>
+            <span class="tag accent">YOLO / Ultralytics</span>
+            <span class="tag accent">scikit-learn</span>
+            <span class="tag accent">XGBoost</span>
+            <span class="tag accent">SHAP</span>
+            <span class="tag accent">Computer Vision</span>
+            <span class="tag accent">Object Detection</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-label">Languages &amp; Tools</div>
+          <div class="skill-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">Anthropic / Claude API</span>
+            <span class="tag">pandas</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">OpenCV</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-label">Domain</div>
+          <div class="skill-tags">
+            <span class="tag">Large Loss Commercial Property</span>
+            <span class="tag">Appraisal &amp; Umpire</span>
+            <span class="tag">Construction Estimating</span>
+            <span class="tag">Coverage Analysis</span>
+            <span class="tag">CAT Response</span>
+            <span class="tag">Fraud Investigation</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-label">Credentials</div>
+          <div class="skill-tags">
+            <span class="tag">AIC Designation</span>
+            <span class="tag">National General Adjuster</span>
+            <span class="tag">TX · LA · FL · AL · OK Licenses</span>
+            <span class="tag">B.A. Economics — UC Davis</span>
+          </div>
+        </div>
+      </div>
+      <div class="skills-block">
+        <div>
+          <div class="skill-group-label">Experience</div>
+          <div style="display:flex;flex-direction:column;gap:1.2rem;margin-top:0.2rem;">
+            <div>
+              <div style="font-size:0.88rem;font-weight:700;color:#f1f5f9;">National General Adjuster</div>
+              <div style="font-size:0.82rem;color:var(--accent2);margin-bottom:0.15rem;">Engle Martin &amp; Associates — Current</div>
+              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Large commercial property losses, coverage disputes, appraisal proceedings, umpire roles. $5M–$60M+ individual losses.</div>
+            </div>
+            <div>
+              <div style="font-size:0.88rem;font-weight:700;color:#f1f5f9;">General Adjuster / Senior Consultant</div>
+              <div style="font-size:0.82rem;color:var(--accent2);margin-bottom:0.15rem;">JS Held</div>
+              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Complex commercial property, forensic analysis, litigation support.</div>
+            </div>
+            <div>
+              <div style="font-size:0.88rem;font-weight:700;color:#f1f5f9;">Staff &amp; Independent Adjuster</div>
+              <div style="font-size:0.82rem;color:var(--accent2);margin-bottom:0.15rem;">Farmers Insurance · Independent CAT</div>
+              <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;">Multi-state CAT deployments. Construction and estimating foundation built here.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-block">
+      <div class="contact-text">
+        <h3>Ben Kennedy</h3>
+        <p>Houston, TX &nbsp;·&nbsp; benkennedy5386@gmail.com</p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link" href="https://github.com/benkennedyai" target="_blank">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          github.com/benkennedyai
+        </a>
+        <a class="contact-link" href="mailto:benkennedy5386@gmail.com">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          benkennedy5386@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Ben Kennedy &nbsp;·&nbsp; Houston, TX &nbsp;·&nbsp; AI/ML Engineer
+</footer>
+
+</body>
+</html>
